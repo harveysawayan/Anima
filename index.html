@@ -1,0 +1,1941 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WILD PERSPECTIVES | GEC 16 Exhibit</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-forest: #050805;
+            --deep-slate: #0f2d0f; /* Slightly different tone for the gradient */
+            --accent-green: #4ade80;
+            --nav-glass: rgba(5, 8, 5, 0.8); /* Darker, more opaque for the nav */
+            --border: rgba(74, 222, 128, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
+            /* Mesh Gradient: Deep greens and slates for depth */
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(74, 222, 128, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(74, 222, 128, 0.05) 0%, transparent 40%),
+                linear-gradient(180deg, #000000 0%, #0a0f0a 100%);
+            background-attachment: fixed;
+        }
+
+        /* Add this right below body to add the "Paper/Canvas" texture */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.03; 
+            pointer-events: none;
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+            z-index: 1;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(5, 8, 5, 0.85); /* Darker glass */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(74, 222, 128, 0.15); /* Visible separation */
+        }
+
+        /* 2. THE NAVIGATOR (Add this new section) */
+        .glass-nav {
+            position: fixed;
+            top: 0; 
+            width: 100%; 
+            /* INCREASED HEIGHT AND PADDING */
+            height: 110px; 
+            padding: 0 5%; 
+            
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            z-index: 1000;
+            
+            background: transparent;
+            border-bottom: 1px solid transparent;
+            backdrop-filter: blur(0px);
+            
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Update the scrolled state height too so it "shrinks" slightly when moving */
+        .glass-nav.scrolled {
+            height: 80px; 
+            padding: 0 5%;
+            background: rgba(10, 15, 10, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(74, 222, 128, 0.1);
+        }
+
+        /* 2. LOGO REFINEMENT */
+        .nav-logo { 
+            font-size: 1.2rem;
+            font-weight: 900; 
+            letter-spacing: 4px; 
+            text-transform: uppercase;
+        }
+
+        .nav-logo span { 
+            color: #4ade80; 
+            text-shadow: 0 0 10px rgba(74, 222, 128, 0.5); /* Matching the main title glow */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            position: relative;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: 0.3s ease;
+            padding: 10px 0;
+        }
+
+        /* THE GLOWING UNDERLINE EFFECT */
+        .nav-links a::after {
+            content: "";
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 0; height: 1px;
+            background: #4ade80;
+            box-shadow: 0 0 10px #4ade80;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Ambient Background Texture */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(74, 222, 128, 0.05) 0%, transparent 80%);
+            z-index: -1;
+        }
+
+       header {
+            height: 100vh;
+            display: flex;
+            justify-content: center; /* Keeps it horizontal center */
+            align-items: center;     /* This is what we will tweak */
+            padding-top: 80px;       /* ADD THIS: This pushes the title down from the top */
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.95)), 
+                        url('https://images.unsplash.com/photo-1518998053901-5348d3961a04?q=80&w=2574&auto=format&fit=crop'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            overflow: hidden;
+            animation: simpleFade 2s ease-out;
+            
+        }
+        @keyframes simpleFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        header::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(74, 222, 128, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .sub-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 5vw, 3rem);
+            font-weight: 400;
+            font-style: italic;
+            color: rgba(255,255,255,0.9); /* High-end Pearl White */
+            margin-top: 25px;
+            letter-spacing: 6px; /* Increased for that "Gallery" feel */
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeIn 1.2s 0.8s ease forwards;
+        }
+
+            /* Adds a subtle "Leopard/Snake" skin texture over the header */
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 10vw, 7rem);
+            background: linear-gradient(to right, #fff, #4ade80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-style: italic;
+            font-weight: 700;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            animation: bounce 2s infinite;
+            color: var(--accent-green);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+        }
+
+        /* Gallery Grid */
+        .container {
+            width: 95%;
+            max-width: 1800px; /* Increased to allow 4 items with huge gaps */
+            margin: 0 auto;
+            padding: 60px 0;
+            text-align: center; /* Centers all titles and labels */
+        }
+
+        /* The wrapper for the cards */
+        .gallery-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px; /* HUGE GAP to push images toward the screen edges */
+            justify-content: center; /* Keeps the whole group balanced in the middle */
+            padding: 40px 0;
+        }
+
+        /* Individual Art Card */
+        .art-card {
+            /* Math: 25% width minus a portion of the 80px gaps */
+            flex: 0 1 calc(25% - 60px); 
+            min-width: 310px; /* Keeps them large on smaller screens */
+            text-align: left; /* Keeps the individual title/medium text aligned to the drawing */
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        /* Class added by JS on scroll */
+        .reveal { opacity: 1; transform: translateY(0); }
+
+        .art-card:hover {
+            border-color: var(--accent-green);
+            transform: scale(1.03);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .img-container {
+            width: 100%;
+            aspect-ratio: 1 / 1.414; /* Strict A4 Ratio */
+            background: #0a0a0a;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            margin-bottom: 20px;
+            position: relative; /* Necessary for the overlay positioning */
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .img-container::after {
+            content: "CLICK TO LEARN MORE";
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(74, 222, 128, 0.3); /* Green overlay with low opacity */
+            color: #fff;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.4s ease;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .art-card:hover {
+            transform: translateY(-15px); /* Goes up a bit more for drama */
+        }
+
+        .art-card:hover img {
+            transform: scale(1.1); /* Smooth zoom in */
+        }
+        .art-card:hover .img-container {
+            /* The Green Light Glow around the artwork */
+            box-shadow: 0 0 30px rgba(74, 222, 128, 0.7); 
+            transition: box-shadow 0.4s ease;
+        }
+
+        .art-card:hover .img-container::after {
+            opacity: 1; /* Show the green overlay and text */
+        }
+
+        .art-meta {
+            padding: 0 5px;
+        }
+        
+        .art-meta p {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .art-title {
+            font-family: 'Playfair Display', serif; /* Use your serif font here */
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
+        /* Artist Section */
+        .artist-footer {
+            background: rgba(255,255,255,0.02);
+            padding: 80px 20px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .bio-box {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            padding-top: 0; /* This pushes everything down so it's not hidden by the nav */
+        }
+
+        .brand-block {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2; /* Added a bit more space between logo and group tag */
+            margin-top: 5px;  /* Nudges the logo block down slightly */
+        }
+
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .nav-logo span {
+            color: #4ade80; /* Emerald accent */
+            font-weight: 300;
+        }
+
+        .group-tag {
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(2deg); }
+            50% { transform: translateY(-20px) rotate(-1deg); }
+        }
+
+        /* 3. Title Styling */
+        .hero-content {
+            z-index: 2;
+            text-align: center;
+            margin-top: 40px; /* Adjust this number to push it down more or less */
+            transition: transform 0.1s ease-out;
+            will-change: transform;
+        }
+
+        .main-title {
+            font-size: clamp(3rem, 12vw, 8rem) !important;
+            margin: 10px 0;
+            line-height: 0.9;
+        }
+
+        .title-accent {
+            width: 80px;
+            height: 4px;
+            background: #4ade80;
+            margin: 20px auto;
+            border-radius: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .title-accent::after {
+            content: "";
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            to { left: 100%; }
+        }
+
+        .scrapbook-title {
+            font-size: 0.9rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            margin-top: 10px;
+        }
+
+        .exhibit-tag {
+            position: absolute;
+            /* CHANGE THIS: 5% or 6% will align it much better with your 8% nav */
+            left: 5%; 
+            top: 60%;
+            transform: translateY(-50%) rotate(-90deg);
+            transform-origin: left;
+            font-size: 0.7rem;
+            letter-spacing: 5px;
+            
+            /* Lowering the opacity slightly helps the hierarchy */
+            color: rgba(73, 236, 133, 0.6); 
+            
+            font-weight: 700;
+            text-transform: uppercase;
+            white-space: nowrap;
+            border-left: 1px solid rgba(74, 222, 128, 0.3);
+            padding-left: 15px;
+            
+            /* Optional: Ensure it stays behind the nav text */
+            z-index: 5; 
+        }
+
+        .anima-title {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(5rem, 18vw, 12rem);
+            font-weight: 900;
+            letter-spacing: -5px;
+            text-transform: uppercase;
+            line-height: 0.8;
+            margin: 0;
+            color: #fff;
+            text-shadow: 0 0 30px rgba(74, 222, 128, 0.3);
+            transform: scaleY(1.3);
+            display: block;
+            /* NEW: Slide Up Reveal */
+            animation: revealUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+
+        .title-accent {
+            width: 60px;
+            height: 2px;
+            background: rgba(255,255,255,0.2);
+            margin: 30px auto;
+        }
+
+        /* 4. NEW ANIMATIONS */
+        @keyframes revealUp {
+            from { opacity: 0; transform: scaleY(1.3) translateY(50px); }
+            to { opacity: 1; transform: scaleY(1.3) translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes breathe {
+            from { text-shadow: 0 0 10px rgba(255,255,255,0); }
+            to { text-shadow: 0 0 20px rgba(74, 222, 128, 0.4); }
+        }
+
+
+        /* Add this to your main container for a "snap" effect */
+        .gallery-container {
+            scroll-snap-type: y mandatory;
+            overflow-y: scroll;
+            height: 100vh;
+        }
+
+        .gallery-section {
+            position: relative;
+            padding: 150px 0; /* More space to show off the background */
+        }
+
+        .category-label {
+            display: table;
+            color: #4ade80;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            border-left: 2px solid #4ade80;
+            padding-left: 15px;
+            display: table;
+        }
+
+        .section-intro {
+            margin-bottom: 60px;
+            text-align: left;
+        }
+
+        .category-tag {
+            color: #4ade80;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4.5rem; /* Slightly larger for a bold, wide-screen look */
+            color: #fff;
+            margin-bottom: 50px;
+            padding-left: 5px;
+            letter-spacing: -1px;
+            margin-left: 0; /* Align perfectly with the left edge of the first image */
+            text-align: left;
+            position: relative;
+            z-index: 1; /* Ensures title sits ON TOP of the mega-text */
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .section-desc {
+            color: rgba(255,255,255,0.5);
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .art-meta .desc {
+            opacity: 0.6;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .sub-category {
+            background: transparent; /* Remove the heavy glass background */
+            padding: 0;
+            margin-bottom: 60px;
+            border: none;
+        }
+
+        .medium-title {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent-green);
+            margin: 60px 0 30px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centers the sub-category text */
+            gap: 30px;
+        }
+
+        .medium-title::before,
+        .medium-title::after {
+            content: "";
+            flex: 1; /* Lines grow to fill the rest of the container width */
+            max-width: 200px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Subtle glow blobs to break up the "plainness" */
+        .gallery-section {
+            position: relative;
+            z-index: 2;
+        }
+
+        .gallery-section::after {
+            content: "";
+            position: absolute;
+            top: 10%; right: -10%;
+            width: 500px; height: 500px;
+            filter: blur(150px);
+            opacity: 0.04;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Unique light for Physical section (Earth/Amber) */
+        #physical::after { background: #d4a373; }
+
+        /* Signature green light for Digital section */
+        #digital::after { background: var(--accent-green); }
+
+        .section-title, .category-label {
+            margin: 0 auto 30px auto;
+            text-align: center;
+            display: table; /* Keeps the border-left effect tight to the text */
+        }
+
+        /* THE ART DETAIL OVERLAY */
+        .art-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(1, 9, 2, 0.8);
+            backdrop-filter: blur(20px);
+            display: none;
+            z-index: 1000;
+            /* FIX: Allow the whole overlay to scroll */
+            overflow-y: auto; 
+            padding: 50px 0; 
+        }
+
+        /* NEW: The Active State (How it looks when fully open) */
+        .art-overlay.active {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            backdrop-filter: blur(25px); /* Frosted glass finish */
+        }
+
+        .art-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .overlay-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 60px;
+            /* FIX: Align to top so it doesn't get cut off when centered */
+            align-items: flex-start; 
+            padding: 0 40px;
+        }
+
+        /* NEW: The Content when Active (Slides into place) */
+        .art-overlay.active .overlay-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* LEFT SIDE: The Zoomed Image */
+        .overlay-image-side {
+            height: 80vh;
+            display: flex;
+            justify-content: center;
+        }
+
+        .overlay-image-side img {
+            height: 100%;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        /* RIGHT SIDE: The Description */
+        .overlay-info-side {
+            flex: 1;
+            color: #fff;
+            max-height: 80vh; /* Prevents text from going off-screen */
+            overflow-y: auto; /* Adds a scrollbar if the description is very long */
+            padding-right: 20px;
+        }
+
+        .overlay-info-side h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--accent-green);
+            margin-bottom: 20px;
+        }
+
+        .overlay-info-side .medium-tag {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .overlay-info-side .full-desc {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #bbb;
+            margin-bottom: 40px;
+        }
+
+        /* CLOSE BUTTON */
+        .close-overlay {
+            position: absolute;
+            top: 40px; right: 40px;
+            background: none;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.5);
+            font-size: 2rem;
+            width: 70px; height: 70px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 2001;
+            display: flex; justify-content: center; align-items: center;
+            
+            /* Transition and Initial State */
+            opacity: 0;
+            transform: rotate(-90deg) scale(0.5);
+            transition: all 0.5s 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        /* When overlay is active, the close button appears */
+        .art-overlay.active .close-overlay {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+
+        .close-overlay:hover {
+            color: #fff;
+            border-color: #fff;
+            transform: rotate(90deg); /* Modern interaction */
+        }
+
+        .close-overlay:hover {
+            background: var(--accent-green);
+            color: #000;
+            border-color: var(--accent-green);
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Unique animation for the large image */
+        .art-overlay.active .overlay-image-side {
+            animation: imageScaleIn 0.8s 0.1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+            opacity: 0; /* Starts faded, animation handles reveal */
+        }
+
+        /* Unique animation for the description block */
+        .art-overlay.active .overlay-info-side {
+            animation: textSlideIn 0.8s 0.2s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+            opacity: 0; /* Starts faded, animation handles reveal */
+        }
+
+        /* KEYFRAMES for the entry */
+        @keyframes imageScaleIn {
+            0% { opacity: 0; transform: scale(0.9) rotate(-3deg); }
+            100% { opacity: 1; transform: scale(1) rotate(0deg); }
+        }
+
+        @keyframes textSlideIn {
+            0% { opacity: 0; transform: translateX(50px); }
+            100% { opacity: 1; transform: translateX(0); }
+        }
+
+        .overlay-info-side::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .overlay-info-side::-webkit-scrollbar-thumb {
+            background: var(--accent-green);
+            border-radius: 10px;
+        }
+
+        #overlayImg {
+            max-height: 85vh; /* Prevents the A4 image from being taller than the screen */
+            width: auto;
+            aspect-ratio: 1 / 1.414;
+            object-fit: contain;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        /* OPTION 1: Label & Title Stack */
+        .container {
+            text-align: center; /* Centers the whole block */
+        }
+
+        .category-label {
+            display: block; /* Forces it onto its own line above the title */
+            font-size: 0.75rem;
+            letter-spacing: 6px; /* High-end spaced out look */
+            text-transform: uppercase;
+            color: var(--accent-green);
+            margin: 0 auto 10px auto; /* Centers it and pulls it close to the title */
+            border-left: none !important; /* Removes that side-line for a cleaner look */
+            opacity: 0.8;
+            margin-bottom: 40px; 
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-top: 0; /* Ensures it hugs the label above it */
+            line-height: 1.1;
+        }
+        
+        .art-meta p {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            
+            /* This handles the alignment for long names */
+            padding-left: 65px; /* Adjust this number to match the width of "Artist: " */
+            text-indent: -65px; 
+            margin-bottom: 4px;
+        }
+
+        /* Artist Grid Styling */
+        .artist-grid {
+            display: flex;           /* Changed from grid to flex for better centering */
+            flex-wrap: wrap;         /* Allows cards to move to the next row */
+            justify-content: center; /* Centers the cards in every row */
+            gap: 30px;
+            margin-top: 50px;
+            padding: 0 5%;           /* Balanced side spacing */
+        }
+        .artist-card {
+            flex: 0 1 220px;         /* Keeps the 220px width but allows centering */
+            background: rgba(74, 222, 128, 0.08);
+            border: 1px solid rgba(74, 222, 128, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            text-align: center;
+            border-radius: 12px;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            overflow: hidden; /* Clips the zoom and overlay to the card shape */
+        }
+
+        .artist-card img {
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .artist-card:hover {
+            transform: translateY(-10px);
+            /* The Green Glow */
+            box-shadow: 0 0 30px rgba(74, 222, 128, 0.3);
+            border-color: rgba(74, 222, 128, 0.5);
+        }
+
+        .artist-card::after {
+            content: "CLICK TO LEARN MORE";
+            position: absolute;
+            top: 0; 
+            left: 0;
+            width: 100%; 
+            height: 100%;
+            background: rgba(74, 222, 128, 0.3); /* Subtle green overlay */
+            color: #ffffff;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            opacity: 0; /* Hidden initially */
+            transition: opacity 0.4s ease;
+            z-index: 2;
+            padding-top: 150px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .artist-card:hover::after {
+            opacity: 1; /* Shows the "Click to learn more" */
+        }
+
+        .artist-card:hover img {
+            transform: scale(1.1); /* Zooms the profile picture */
+        }
+
+        .artist-thumb {
+            width: 100%; /* Takes full width of the card padding */
+            aspect-ratio: 3 / 4; 
+            object-fit: cover;
+            border-radius: 6px; /* Slightly rounded corners for a modern look */
+            margin-bottom: 15px;
+            border: 1px solid rgba(74, 222, 128, 0.1);
+        }
+
+        .artist-card h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--accent-green);
+            font-size: 1.1rem; /* Made the name a bit bigger too */
+            margin-bottom: 5px;
+        }
+
+        .artist-card p {
+            font-size: 0.75rem;
+            opacity: 0.6;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Ensures the profile info doesn't stretch too thin */
+        .profile-details {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Optional: Adjust the image-side background to match the museum feel */
+        .overlay-image-side {
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+
+        /* --- DEDICATED ARTIST OVERLAY --- */
+        #artistOverlay .overlay-content {
+            /* CHANGE THIS FROM flex-start TO center */
+            align-items: center; 
+            
+            max-height: 90vh; /* Keeps the overlay from going off-screen */
+            overflow: hidden; /* Prevents the whole container from scrolling weirdly */
+        }
+
+        /* LEFT SIDE: Custom 3:4 Portrait container */
+        #artistOverlay .overlay-image-side {
+            flex: 0 0 350px; /* Fixed width for the portrait */
+            height: auto; /* Scales height automatically */
+            aspect-ratio: 3 / 4; /* Enforces strict 3:4 ratio */
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+        }
+
+        #artistOverlay .overlay-image-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures faces aren't stretched */
+        }
+
+        /* RIGHT SIDE: Custom Info alignment */
+        #artistOverlay .overlay-info-side {
+            flex: 1;
+            padding-left: 40px; /* Gives space between image and text */
+            padding-right: 20px; /* Extra room for the scrollbar */
+            overflow-y: auto; /* THIS FIXES THE CUT OFF TEXT */
+            max-height: 80vh; /* Limits height so it scrolls internally */
+            scrollbar-width: thin; /* For Firefox */
+            scrollbar-color: var(--accent-green) transparent;
+        }
+
+        #artistOverlay .overlay-info-side::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #artistOverlay .overlay-info-side::-webkit-scrollbar-thumb {
+            background-color: var(--accent-green);
+            border-radius: 10px;
+        }
+
+        /* High-End Serif font for the Name */
+        #artistOverlay h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--accent-green);
+            margin-bottom: 5px;
+            margin-top: 0; /* Tight with the course tag above */
+        }
+
+        /* Grouping Bio and Statement side-by-side */
+        .profile-details-grid {
+            display: grid;
+            grid-template-columns: 1fr; /* Stack them on top of each other if they are long */
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .profile-details-grid h4 {
+            color: var(--accent-green);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+
+        @media (min-width: 1200px) {
+            .profile-details-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .full-desc {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            /* FIX: This makes the text "Justified" */
+            text-align: justify; 
+            hyphens: auto; /* Prevents weird gaps in justified text */
+        }
+
+        /* Specific spacing for the profile overlay */
+        .overlay-info-side {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gallery-section {
+            position: relative;
+            padding: 100px 0;
+            width: 100%;
+            
+        }
+
+        .gallery-section::before {
+            content: attr(data-category);
+            position: absolute;
+            /* This centers it exactly behind the title's area */
+            top: 70px; 
+            left: 50%;
+            transform: translate(-50%, var(--parallax-offset, 0px));
+            
+            font-family: 'Playfair Display', serif;
+            font-size: 15vw;
+            font-weight: 700;
+            color: var(--accent-green);
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 0;
+            white-space: nowrap;
+            line-height: 1;
+            will-change: transform;
+        }
+
+        .about-section {
+            padding: 100px 10%;
+            background: linear-gradient(to bottom, transparent, rgba(74, 222, 128, 0.05));
+            border-top: 1px solid rgba(74, 222, 128, 0.1);
+        }
+
+        .about-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(74, 222, 128, 0.03);
+            padding: 60px;
+            border-radius: 20px;
+            border: 1px solid rgba(74, 222, 128, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .about-header {
+            margin-bottom: 40px;
+            text-align: left;
+        }
+
+        .about-header .eyebrow {
+            color: var(--accent-green);
+            font-size: 0.8rem;
+            letter-spacing: 4px;
+            font-weight: 800;
+        }
+
+        .about-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #b0b0b0;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+
+        .about-content strong {
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        /* Adds a subtle glow effect to the container */
+        .about-container:hover {
+            box-shadow: 0 0 50px rgba(74, 222, 128, 0.05);
+            border-color: rgba(74, 222, 128, 0.2);
+            transition: all 0.5s ease;
+        }
+
+        /* =========================
+        📱 MOBILE RESPONSIVE FIX
+        ========================= */
+        @media (max-width: 768px) {
+
+            /* NAVBAR */
+            .glass-nav {
+                height: auto;
+                padding: 15px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                gap: 15px;
+                margin-top: 10px;
+            }
+
+            /* HEADER */
+            header {
+                background-attachment: scroll; /* IMPORTANT for phones */
+                padding-top: 120px;
+            }
+
+            .anima-title {
+                font-size: 4rem;
+            }
+
+            .sub-title {
+                font-size: 1.2rem;
+                letter-spacing: 3px;
+            }
+
+            /* GALLERY GRID */
+            .gallery-grid {
+                gap: 20px;
+            }
+
+            .art-card {
+                flex: 0 1 100%; /* FULL WIDTH */
+                min-width: unset;
+            }
+
+            /* SECTION TITLES */
+            .section-title {
+                font-size: 2rem;
+            }
+
+            /* OVERLAY FIX (VERY IMPORTANT) */
+            .overlay-content {
+                flex-direction: column;
+                gap: 20px;
+                padding: 20px;
+            }
+
+            .overlay-image-side {
+                height: auto;
+                max-height: 50vh;
+            }
+
+            .overlay-info-side {
+                max-height: none;
+                overflow: visible;
+            }
+
+            /* ARTIST GRID */
+            .artist-grid {
+                gap: 20px;
+            }
+
+            .artist-card {
+                flex: 0 1 100%;
+            }
+
+            /* ABOUT SECTION */
+            .about-container {
+                padding: 30px 20px;
+            }
+        }
+
+        /* =========================
+        🔥 CINEMATIC INTRO SECTION
+        ========================= */
+
+        .intro-section {
+            position: relative;
+            padding: 120px 20px 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Subtle glowing background orb */
+        .intro-section::before {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(74, 222, 128, 0.15), transparent 70%);
+            filter: blur(120px);
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 0;
+        }
+
+        .intro-glass {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 60px 50px;
+            border-radius: 20px;
+
+            background: rgba(74, 222, 128, 0.03);
+            border: 1px solid rgba(74, 222, 128, 0.15);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            text-align: center;
+
+            /* soft glow */
+            box-shadow: 0 0 40px rgba(74, 222, 128, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .intro-glass:hover {
+            border-color: rgba(74, 222, 128, 0.3);
+            box-shadow: 0 0 80px rgba(74, 222, 128, 0.08);
+        }
+
+        /* Small top label */
+        .intro-tag {
+            display: block;
+            font-size: 0.7rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--accent-green);
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        /* Title */
+        .intro-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3rem);
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        /* Animated line */
+        .intro-line {
+            width: 60px;
+            height: 2px;
+            background: var(--accent-green);
+            margin: 20px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .intro-line::after {
+            content: "";
+            position: absolute;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #fff, transparent);
+            animation: shine 3s infinite;
+        }
+
+        /* Text */
+        .intro-text {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: rgba(255,255,255,0.7);
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        /* 📱 MOBILE */
+        @media (max-width: 768px) {
+            .intro-glass {
+                padding: 40px 25px;
+            }
+
+            .intro-text {
+                font-size: 0.95rem;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+
+    
+
+<nav class="glass-nav">
+    <div class="brand-block">
+        <div class="nav-logo">ANIMA<span>COLLECTION</span></div>
+        <span class="group-tag">THE ANIMAL GALLERY | GROUP 4</span>
+    </div>
+    <div class="nav-links">
+        <a href="#physical">Physical</a>
+        <a href="#photography">Photography</a>
+        <a href="#digital">Digital</a>
+        <a href="#the-artists">Artists</a>
+        <a href="#about">About</a>
+    </div>
+</nav>
+
+<header>
+    <div class="exhibit-tag">GEC 16 // ART APPRECIATION</div>
+
+    <div class="hero-content">
+        <div class="main-title-wrapper">
+            <h1 class="anima-title">ANIMA</h1>
+            <h2 class="sub-title">Essence & Form</h2>
+        </div>
+        
+        <div class="title-accent"></div>
+        <p class="scrapbook-title">Featuring: The Animal Gallery</p>
+    </div>
+    
+</header>
+
+<section class="intro-section">
+    <div class="intro-glass">
+        
+        <span class="intro-tag">CURATOR’S NOTE</span>
+        
+        <h2 class="intro-title">The Living Archive</h2>
+
+        <div class="intro-line"></div>
+
+        <p class="intro-text">
+            ANIMA is a curated exploration of life through art where instinct, form, and emotion converge. Each piece reflects a different perspective of the animal world, capturing its quiet intensity and raw presence. Across physical and digital mediums, this collection transforms observation into expression, allowing nature to be seen not as distant but as something deeply felt.
+        </p>
+
+    </div>
+</section>
+
+<div class="container">
+    <section id="physical" class="gallery-section" data-category="PHYSICAL ART">
+        <div class="category-label">Collection 01</div>
+        <h2 class="section-title">Physical Art</h2>
+        
+        <div class="sub-category">
+            <h4 class="medium-title">The Scribbling Soul</h4>
+            <div class="gallery-grid">
+                <div class="art-card" data-description="This artwork is inspired by the lizard from the movie Hoppers. It portrays the idea that even the smallest creatures can possess remarkable charm and character. The cute lizard symbolizes courage, curiosity, and the beauty of individuality. Through its playful and appealing appearance, this piece reminds viewers that size does not determine significance, and that even the smallest beings can leave a meaningful impact." data-date="April 24, 2026">
+                    <div class="img-container"><img src="scribble1.png" alt="Scribble 1"></div>
+                    <div class="art-meta">
+                        <h3 class="art-title">Small but Brave</h3>
+                        <p><strong>Artist:</strong> Princess Jamaica Fem M. Ipulan</p>
+                        <p><strong>Medium:</strong> Scribbling Soul</p>
+                    </div> </div> <div class="art-card" data-description="This scribble art is inspired by Nemo, the well-loved fish known for his bravery and determination. It reflects the journey of overcoming fears, embracing challenges, and discovering one’s true potential. Through its vibrant and playful lines, this piece symbolizes hope, resilience, and the importance of trusting oneself while exploring life’s endless opportunities." data-date="April 24, 2026">
+                    <div class="img-container"><img src="scribble2.png" alt="Scribble 2"></div>
+                    <div class="art-meta">
+                        <h3 class="art-title">Beyond the Reef</h3>
+                        <p><strong>Artist:</strong> Princess Jamaica Fem M. Ipulan</p>
+                        <p><strong>Medium:</strong> Scribbling Soul</p>
+                    </div> </div> </div>
+        </div>
+
+        <div class="sub-category">
+            <h4 class="medium-title">Coffee Paint</h4>
+            <div class="gallery-grid">
+                <div class="art-card" data-description=" A painting of a monkey created using coffee, using natural tones and layered washes to capture its expressive features and playful character." data-date="April 24, 2026">
+                    <div class="img-container"><img src="coffee1.png" alt="Coffee 1"></div>
+                    <div class="art-meta">
+                        <h3 class="art-title">Earth Mischief</h3>
+                        <p><strong>Artist:</strong> Joe Hannah S. Pulvera</p>
+                        <p><strong>Medium:</strong> Coffee Paint</p>
+                    </div>
+                </div>
+                <div class="art-card" data-description="A coffee painting of a cat playfully sticking out its tongue, using soft tonal layers to capture its silly expression and lighthearted personality." data-date="April 24, 2026">
+                    <div class="img-container"><img src="coffee2.png" alt="Coffee 2"></div>
+                    <div class="art-meta">
+                        <h3 class="art-title">Playful Whiskers</h3>
+                        <p><strong>Artist:</strong> Joe Hannah S. Pulvera</p>
+                        <p><strong>Medium:</strong> Coffee Paint</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sub-category">
+            <h4 class="medium-title">Charcoal and Graphite Pencils</h4>
+            <div class="gallery-grid">
+                <div class="art-card" data-description="A charcoal drawing of a raccoon, emphasizing the contrast of its dark mask and textured fur through careful shading, capturing its curious and watchful nature." data-date="April 23, 2026">
+                    <div class="img-container"><img src="charcoal1.png" alt="Charcoal 1"></div>
+                    <div class="art-meta">
+                        <h3 class="art-title">Midnight Forager</h3>
+                        <p><strong>Artist:</strong> Joe Hannah S. Pulvera</p>
+                        <p><strong>Medium:</strong> Charcoal and Graphite Pencils</p>
+                    </div> </div> <div class="art-card" data-description=" A detailed charcoal drawing of a golden retriever, highlighting the soft texture of its fur through careful shading using paint brushes and fine strokes using stick glue, reflecting patience and a calm, lifelike presence." data-date="April 23, 2026">
+                    <div class="img-container"><img src="charcoal2.png" alt="Charcoal 2"></div>
+                    <div class="art-meta">
+                        <h3 class="art-title">Gently Loyal</h3>
+                        <p><strong>Artist:</strong> Joe Hannah S. Pulvera</p>
+                        <p><strong>Medium:</strong> Charcoal and Graphite Pencils</p>
+                    </div> </div> </div>
+        </div>
+
+        <div class="sub-category">
+            <h4 class="medium-title">Ballpoint Pen</h4>
+            <div class="gallery-grid">
+                <div class="art-card" data-description="I drew this eagle because I admire how they stay calm and focused, no matter how chaotic things get. Using a pen forced me to be really careful with every line, especially when detailing the feathers to make them look real. To me, the eagle represents freedom and the strength to look at the 'big picture' rather than getting stuck in small problems. I really wanted the eyes to look sharp to show that even when life is tough, you can still keep a clear head and move forward." 
+                data-date="April 24, 2026">
+                    <div class="img-container"><img src="ballpoint1.png" alt="Pen 1"></div>
+                    <div class="art-meta">
+                        <h3 class="art-title">The Silent Observer</h3>
+                        <p><strong>Artist:</strong> Roberto M. Delos Santos Jr.</p>
+                        <p><strong>Medium:</strong> Ballpoint Pen</p>
+                    </div>
+                </div>
+                <div class="art-card" data-description="This drawing represents the moments in life when we feel completely alone, standing under the weight of a 'storm' that no one else sees. Like the carabao, we often have to face our hardest days in silence, staying strong even when the world feels cold and empty. It is a tribute to the quiet courage it takes to keep standing when you feel forgotten by everyone around you" 
+                data-date="April 24, 2026">
+                    <div class="img-container"><img src="ballpoint2.png" alt="Pen 2"></div>
+                    <div class="art-meta">
+                        <h3 class="art-title">Alone Against the Storm </h3>
+                        <p><strong>Artist:</strong> Roberto M. Delos Santos Jr.</p>
+                        <p><strong>Medium:</strong> Ballpoint Pen</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="photography" class="gallery-section" data-category="PHOTOGRAPHY">
+        <div class="category-label">Collection 02</div>
+        <h2 class="section-title">Photography</h2>
+        <div class="gallery-grid">
+            <div class="art-card" data-description="This photograph uses the fill the frame technique to eliminate all distractions and create an intimate, high-impact focus on the dog's physical features. The tight composition and dramatic lighting emphasize the fine textures of the fur and the moisture of the nose, making every detail of the animal's face the central focal point." data-date="April 21, 2026">
+                <div class="img-container"><img src="photo1.png" alt="Photo 1"></div>
+                <div class="art-meta">
+                    <h3 class="art-title">Soulful Focus</h3>
+                    <p><strong>Artist:</strong> Ken Guian D. Villaflores</p>
+                    <p><strong>Medium:</strong> Photography</p>
+                </div>
+            </div>
+            <div class="art-card" data-description=" I used the rule of thirds to place the subject off-center, creating a more balanced and professional look. This technique guides your eye through the display and makes the composition feel more natural and interesting." data-date="April 23, 2026">
+                <div class="img-container"><img src="photo2.png" alt="Photo 2"></div>
+                <div class="art-meta">
+                    <h3 class="art-title">The Research Rabbit</h3>
+                    <p><strong>Artist:</strong> Ken Guian D. Villaflores</p>
+                    <p><strong>Medium:</strong> Photography</p>
+                </div>
+            </div> <div class="art-card" data-description="The photograph shows a carabao standing in a grassy field, viewed through a frame made by a person’s fingers in the foreground. The naturla background of trees and plants highlights the rural setting. The creative hand framing draws attention to the animal and gives the photo a unique perspective." 
+            data-date="April 25, 2026">
+                <div class="img-container"><img src="photo3.png" alt="Photo 3"></div>
+                <div class="art-meta">
+                    <h3 class="art-title">Framed by Nature</h3>
+                    <p><strong>Artist:</strong> Glendy Jennel C. Resohinto</p>
+                    <p><strong>Medium:</strong> Photography</p>
+                </div>
+            </div>
+            <div class="art-card" data-description="A warm moment captured under the sunlight, this portrait shows a dog enjoying the simple joy of being outside. The glow highlights its gentle expression and carefree spirit." 
+            data-date="April 21, 2026">
+                <div class="img-container"><img src="photo4.png" alt="Photo 4"></div>
+                <div class="art-meta">
+                    <h3 class="art-title">Sun-Kissed Smile</h3>
+                    <p><strong>Artist:</strong> Kurt Ryu L. Arabejo</p>
+                    <p><strong>Medium:</strong> Photography</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+    <section id="digital" class="gallery-section" data-category="DIGITAL ART">
+        <div class="category-label">Collection 03</div>
+        <h2 class="section-title">Digital Art</h2>
+        
+        <div class="sub-category">
+            <h4 class="medium-title">Pixel Art</h4>
+            <div class="gallery-grid">
+                <div class="art-card" data-description="The owl is the first piece in the collection and sets the tone for the whole series. With its heavy gaze and still posture, it represents the quiet and observant type of person who thinks deeply and speaks carefully. Brown feathers and sharp golden eyes give it a warm but serious energy." 
+                data-date="April 24, 2026">
+                    <div class="img-container"><img src="pixel1.png" alt="Pixel 1"></div>
+                    <div class="art-meta">
+                        <h3 class="art-title">The Owl</h3>
+                        <p><strong>Artist:</strong> Harold Daiton</p>
+                        <p><strong>Medium:</strong> Pixel Art</p>
+                    </div>
+                </div>
+                <div class="art-card" data-description="The capybara is the heart of the collection. Its relaxed face and steady presence represent the kind of person who brings calm to any room without even trying. The warm sandy tones and half-closed eyes give it a laid-back and grounded feeling that is easy to connect with." 
+                data-date="April 25, 2026">
+                    <div class="img-container"><img src="pixel2.png" alt="Pixel 2"></div>
+                    <div class="art-meta">
+                        <h3 class="art-title">The Capybara</h3>
+                        <p><strong>Artist:</strong> Harold Daiton</p>
+                        <p><strong>Medium:</strong> Pixel Art</p>
+                    </div>
+                </div>
+                <div class="art-card" data-description="The cat closes the collection on a tender and emotional note. With its soft blue eyes and gentle expression, it represents the sensitive and guarded type of person who feels everything deeply but shows it only to those they trust. The mix of black, white, and orange fur gives it a unique and memorable look that matches its complex personality." 
+                data-date="April 26, 2026">
+                    <div class="img-container"><img src="pixel3.png" alt="Pixel 3"></div>
+                    <div class="art-meta">
+                        <h3 class="art-title">The Cat</h3>
+                        <p><strong>Artist:</strong> Harold Daiton</p>
+                        <p><strong>Medium:</strong> Pixel Art</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sub-category">
+            <h4 class="medium-title">Graphic Design</h4>
+            <div class="gallery-grid">
+                <div class="art-card" data-description="This artwork presents the panda through a social media-inspired layout, showing how people view wildlife in today’s digital world. It highlights the contrast between nature and online culture, reminding viewers to appreciate animals beyond screens." 
+                data-date="April 26, 2026">
+                    <div class="img-container"><img src="design1 (2).png" alt="Design 1"></div>
+                    <div class="art-meta">
+                        <h3 class="art-title">The Panda Feed</h3>
+                        <p><strong>Artist:</strong> Humphrey Derek C. Libayao</p>
+                        <p><strong>Medium:</strong> Graphic Design</p>
+                    </div>
+                </div>
+                <div class="art-card" data-description="This artwork presents the black-footed ferret as part of a classified ‘endangered species report,’ combining design and information to raise awareness. The layered documents and investigative style highlight the urgency of protecting one of the world’s rarest animals." 
+                data-date="April 26, 2026">
+                    <div class="img-container"><img src="design2 (3).png" alt="Design 2"></div>
+                    <div class="art-meta">
+                        <h3 class="art-title">The Mustela Files</h3>
+                        <p><strong>Artist:</strong> Humphrey Derek C. Libayao</p>
+                        <p><strong>Medium:</strong> Graphic Design</p>
+                    </div>
+                </div>
+                <div class="art-card" data-description="The 'Radiant Instinct' piece captures a predator’s intuition as a visible, physical energy. The title links directly to the background orbs and embers, creating a radiant force that bleeds onto the fur through a rim lighting effect to show instinct radiating from within. By using 3D text masking and a macro eye-crop, the composition gains depth and an intense, atmospheric focus on the subject’s predatory nature." 
+                data-date="April 24, 2026">
+                    <div class="img-container"><img src="design3 (1).png" alt="Design 3"></div>
+                    <div class="art-meta">
+                        <h3 class="art-title">Radiant Instict</h3>
+                        <p><strong>Artist:</strong> Harvey Miguel T. Sawayan</p>
+                        <p><strong>Medium:</strong> Graphic Design</p>
+                    </div>
+                </div>
+                <div class="art-card" data-description="The 'Philippine Eagle' artwork uses a regal, structured magazine style to honor its status as a national icon. The layered composition features the eagle’s crest overlapping the typography to create a high-end, professional feel, while top-left light rays highlight the golden feathers in its natural habitat. The addition of a sharp eye-detail and the scientific name Pithecophaga jefferyi balances digital artistry with clean, technical documentation." 
+                data-date="April 25, 2026">
+                    <div class="img-container"><img src="design4 (4).png" alt="Design 4"></div>
+                    <div class="art-meta">
+                        <h3 class="art-title">The Phillipine Eagle</h3>
+                        <p><strong>Artist:</strong> Harvey Miguel T. Sawayan</p>
+                        <p><strong>Medium:</strong> Graphic Design</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<section id="the-artists" class="gallery-section" data-category="THE ARTIST">
+    <h2 class="section-title">The Artists</h2>
+    <div class="artist-grid">
+        
+        <div class="artist-card" 
+             onclick="openArtist(this)"
+             data-name="Princess Jamaica Fem M. Ipulan"
+             data-age="18 years old"
+             data-course="1st Year BSIT"
+             data-address="Valencia City, Bukidnon"
+             data-style="Scribble Art"
+             data-bio="Princess Jamaica Fem M. Ipulan is a first-year BSIT student with a passion for creativity and self-expression through art. She enjoys making scribble artworks that transform simple lines into meaningful and lively images. Her works often draw inspiration from animated characters and nature, reflecting themes of courage, hope, and individuality."
+             data-statement="Through my scribble art, I aim to show that creativity can turn simple sketches into pieces filled with meaning and emotion. My artworks are inspired by characters and creatures that symbolize bravery, joy, and uniqueness. I hope my art encourages viewers to appreciate beauty in both simplicity and imagination.">
+            
+            <img src="artist1.jpg" alt="Princess" class="artist-thumb">
+            
+            <h3>Princess Jamaica</h3>
+            <p>Scribble Artist</p>
+        </div>
+
+        <div class="artist-card" 
+             onclick="openArtist(this)"
+             data-name="Joe Hannah S. Pulvera"
+             data-age="18 years old"
+             data-course="1st Year BSIT"
+             data-address="Valencia City, Bukidnon"
+             data-style="Portraits Using Charcoal and Coffee"
+             data-bio="I’m not the sporty type — I’ll be the one creating, expressing, and bringing ideas to life through art instead."
+             data-statement="My artwork captures the beauty of animals through detailed rendering of their fur, emphasizing texture and realism. This level of detail reflects patience and dedication, as each stroke is carefully built over time.">
+            
+            <img src="artist2.jpg" alt="Princess" class="artist-thumb">
+            
+            <h3>Joe Hannah</h3>
+            <p>Charcoal and Coffee Art Artist</p>
+        </div>
+
+        <div class="artist-card" 
+             onclick="openArtist(this)"
+             data-name="Roberto M. Delos Santos Jr. "
+             data-age="18 years old"
+             data-course="1st Year BSIT"
+             data-address="Guinuyoran, Valencia City, Bukidnon"
+             data-style="Ballpoint Pen"
+             data-bio="Roberto  Delos Santos Jr, also known as 'KC' a first-year BSIT student , he's struggling to survive in academic, but through art, he can express his  emotions, stress, problems and find comfort on it."
+             data-statement="I love using ballpoint pens because the permanence of the ink forces me to be fully present and confident with every stroke. It’s satisfying to take a simple, everyday tool and use it to build complex textures and deep shadows through layers of cross-hatching. Since I can’t erase any mistakes, the process feels more honest and raw, giving the final drawing a bold, intentional look that you just can't get with a pencil.">
+            
+            <img src="artist3.png" alt="Princess" class="artist-thumb">
+            
+            <h3>Roberto</h3>
+            <p>Ballpoint Pen Artist </p>
+        </div>
+
+        <div class="artist-card" 
+             onclick="openArtist(this)"
+             data-name=" Ken Guian D. Villaflores"
+             data-age="19 years old"
+             data-course="1st Year BSIT"
+             data-address="Pinatilan, Valencia City, Bukidnon"
+             data-style="Photography"
+             data-bio="Ken Guian D. Villaflores is a first-year BSIT student who enjoys combining technology with creativity. He loves exploring digital art and photography to capture the world in unique ways."
+             data-statement="​I use techniques like filling the frame and the rule of thirds to create balance and focus in my images. By removing distractions and positioning my subjects thoughtfully, I aim to show the beauty in the small details of the world around us.">
+            
+            <img src="artist4.jpg" alt="Princess" class="artist-thumb">
+            
+            <h3>Ken Guian</h3>
+            <p>Photographer</p>
+        </div>
+
+        <div class="artist-card" 
+             onclick="openArtist(this)"
+             data-name="Glendy Jennel C. Resohinto"
+             data-age="18 years old"
+             data-course="1st Year BSIT"
+             data-address="Sugarland Lumbo, Valencia City,Bukidnon "
+             data-style="Photography"
+             data-bio="Glendy Jennel C Resohinto is a first year BSIT student who’s into sport but passionate about capturing moments, emotions and beauty through the lens."
+             data-statement="My photography focuses on capturing simple moments in a creative way. It symbolizes the connection between people, animals, and the environment, showing how simple rural life can be meaningful and beautiful. Through this artwork, I wanted to highlight appreciation for everyday scenes that are often overlooked.">
+            
+            <img src="artist5.jpg" alt="Princess" class="artist-thumb">
+            
+            <h3>Glendy Jennel</h3>
+            <p>Photographer</p>
+        </div>
+
+        <div class="artist-card" 
+             onclick="openArtist(this)"
+             data-name="Kurt Ryu L. Arabejo"
+             data-age="19 years old"
+             data-course="1st Year BSIT"
+             data-address="Poblacion, Nabunturan, Davao de Oro"
+             data-style="Photography"
+             data-bio="Kurt Ryu L. Arabejo is a 19 year old and 1st Year BSIT student. He enjoys photography, especially taking pictures of pets. He likes capturing their natural expressions and everyday moments."
+             data-statement=" My photography focuses on pets, especially my own. I like capturing their natural expressions and simple moments, like when they are relaxed or happy. For me, pets are easy to photograph because they show real emotions without pretending. Through my photos, I want to show how pets bring joy and comfort in our daily lives. Even a simple moment, like sitting under the sun, can become meaningful when captured through the camera.">
+            
+            <img src="artist6.jpg" alt="Princess" class="artist-thumb">
+            
+            <h3>Kurt Ryu</h3>
+            <p>Photographer</p>
+        </div>
+
+        <div class="artist-card" 
+             onclick="openArtist(this)"
+             data-name=" Harold Daiton"
+             data-age="19 years old"
+             data-course="1st Year BSIT"
+             data-address="Maramag, Bukidnon"
+             data-style="Digital Pixel Art"
+             data-bio=" Harold Daiton is a first-year BSIT student who loves to draw and express creativity through digital pixel art."
+             data-statement="I make pixel art because I love how something so simple, made of tiny little squares, can carry so much feeling. My characters are animals on the outside, but they represent real human personalities that we all know or maybe even see in ourselves. I want people to look at my work and feel something familiar.">
+            <img src="artist7.jpg" alt="Princess" class="artist-thumb">
+            
+            <h3>Harold</h3>
+            <p>Digital Pixel Art Artist</p>
+        </div>
+
+        <div class="artist-card" 
+             onclick="openArtist(this)"
+             data-name="Humphrey Derek C. Libayao"
+             data-age="18 years old"
+             data-course="1st Year BSIT"
+             data-address="Valencia City, Bukidnon"
+             data-style="GFX Design / Graphic Design"
+             data-bio="Humphrey Derek C. Libayao is a first-year BSIT student who explores the intersection of technology and creativity. While studying the technical aspects of Information Technology, he is also developing his skills in GFX design. He enjoys transforming complex ideas into clean and modern visuals. For him, design is not only about aesthetics but also about using creativity to tell meaningful stories about the world around him."
+             data-statement="I’ve always felt that if you can make someone smile at a design, you’ve already won half the battle. By making these endangered animals look ‘cute’ and iconic through GFX, I’m trying to create a shortcut to people's hearts. I want to show that these animals aren't just statistics in a textbook; they are precious, charming lives that we really can’t afford to lose.">
+            
+            <img src="artist8.jpg" alt="Princess" class="artist-thumb">
+            
+            <h3>Humphrey Derek</h3>
+            <p>GFX/Graphic Design Artist</p>
+        </div>
+
+        <div class="artist-card" 
+             onclick="openArtist(this)"
+             data-name="Harvey Miguel T. Sawayan"
+             data-age="19 years old"
+             data-course="1st Year BSIT"
+             data-address="Batangan, Valencia City, Bukidnon"
+             data-style="GFX Design/Graphic Design"
+             data-bio="I’m a digital creator into video and photo editing, basically just constantly messing with digital graphic design and stuff like that. I’ve spent a lot of time getting used to the technical side of things, mostly using Alight Motion and CapCut for my videos and Canva and Alight Motion for my photos. I’m always trying to push my edits further, mixing different apps together to see how far I can take a project and make it look professional."
+             data-statement="The two pieces I made on this task are a pretty big jump from what I usually do. My graphic design is usually styled like 'Humphrey,' but for this project, I really wanted to try some new stuff and see if I could pull off a different vibe. It was actually my first time attempting this type of editorial look. I focused on using bold text and dramatic lighting to capture the 'radiant instinct' of the subjects, moving away from my standard style to see if I could make something look like a legit magazine cover. Mixing Canva with Alight Motion for these allowed me to step out of my comfort zone and finally execute this new style I've been wanting to try.">
+            
+            <img src="artist9.jpg" alt="Princess" class="artist-thumb">
+            
+            <h3>Harvey Miguel</h3>
+            <p>GFX/Graphic Design Artist</p>
+        </div>
+
+        
+
+        </div>
+</section>
+
+<section id="about" class="about-section">
+    <div class="about-container">
+        <div class="about-header">
+            <span class="eyebrow">THE ARCHIVE</span>
+            <h2>THE ANIMA PROJECT</h2>
+        </div>
+        
+        <div class="about-content">
+            <p>
+            <strong>Why ANIMA?</strong><br>
+            The name <strong>ANIMA</strong> was chosen because it literally means "breath" or "soul" in Latin. In this gallery, it’s about capturing the spirit of the animals themselves. It is not just a flat picture of them but the feeling of them being alive. The goal was to build a site that feels as raw and intense as the nature it shows, moving away from a basic website and making it feel more like you're walking through a high-end physical exhibit dedicated to the animal world.
+        </p>
+            
+            <p>
+                <strong>How it was built</strong><br>
+                This site wasn't made with a website builder where you can just drag and drop things. It was built manually using <strong>HTML, CSS, and JavaScript</strong> inside <strong>VS Code</strong>. This process is often called <strong>"vibe coding"</strong>—basically, instead of following a strict plan, I just kept changing the code until the "feeling" or the "vibe" of the page looked right.
+            </p>
+
+            <p>
+                <strong>The Reality of Design</strong><br>
+                The project is made up of almost <strong>2,000 lines of code</strong>. Designing it was actually pretty frustrating because, while you’re working, you don’t see the art or the colors. All you see are thousands of lines of text, random numbers, and symbols. You have to hope that the math and the tags you are typing actually turn into a good-looking website when you finally hit refresh. It’s a lot of trial and error to get the symbols on the screen to look like the vision in your head.
+            </p>
+        </div>
+    </div>
+</section>
+
+<footer style="padding: 40px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); font-size: 0.8rem; color: #555; letter-spacing: 1px;">
+    &copy; 2026 GROUP 4 | CENTRAL MINDANAO UNIVERSITY | GEC 16 FINAL
+</footer>
+
+<div class="art-overlay" id="artOverlay">
+    <button class="close-overlay" onclick="closeArt()">×</button>
+    <div class="overlay-content">
+        <div class="overlay-image-side">
+            <img src="" id="overlayImg" alt="Detail">
+        </div>
+        <div class="overlay-info-side">
+            <span class="medium-tag" id="overlayMedium"></span>
+            <h2 id="overlayTitle"></h2>
+            
+            <p id="overlayArtist" style="color: #4ade80; font-weight: 600; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem;"></p>
+            <p id="overlayDate" style="opacity: 0.5; font-size: 0.85rem; margin-bottom: 30px; font-style: italic;"></p>
+            
+            <p class="full-desc" id="overlayDesc"></p>
+        </div>
+    </div>
+</div>
+
+<div class="art-overlay" id="artistOverlay">
+    <button class="close-overlay" onclick="closeArtist()">×</button>
+    <div class="overlay-content">
+        
+        <div class="overlay-image-side">
+            <img src="" id="profileImg" alt="Artist Portrait">
+        </div>
+
+        <div class="overlay-info-side">
+            <span class="medium-tag" id="profileCourse" style="margin-bottom: 5px;"></span> <h2 id="profileName"></h2> <p id="profileMeta" style="color: #fff; opacity: 0.7; margin-bottom: 30px; font-size: 0.9rem; font-weight: 600;"></p> <div class="profile-details-grid">
+                <div>
+                    <h4>Short Bio</h4>
+                    <p id="profileBio" class="full-desc" style="font-size: 1rem; line-height: 1.8;"></p>
+                </div>
+                <div>
+                    <h4>Artist Statement</h4>
+                    <p id="profileStatement" class="full-desc" style="font-style: italic; font-size: 1rem; line-height: 1.8; opacity: 0.8;"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="art-overlay" id="artistOverlay">
+    <button class="close-overlay" onclick="closeArtist()">×</button>
+    <div class="overlay-content">
+        <div class="overlay-image-side">
+            <img src="" id="profileImg" alt="Artist Portrait" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+
+        <div class="overlay-info-side">
+            <span class="medium-tag" id="profileCourse"></span>
+            <h2 id="profileName" style="margin-top: 0; margin-bottom: 5px;"></h2>
+            <p id="profileMeta" style="color: var(--accent-green); margin-bottom: 20px; font-size: 0.9rem; font-weight: 600;"></p>
+            
+            <div class="profile-details">
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: var(--accent-green); margin-bottom: 8px; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;">Short Bio</h4>
+                    <p id="profileBio" class="full-desc" style="font-size: 0.95rem; line-height: 1.6;"></p>
+                </div>
+                <div>
+                    <h4 style="color: var(--accent-green); margin-bottom: 8px; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 1px;">Artist Statement</h4>
+                    <p id="profileStatement" class="full-desc" style="font-style: italic; font-size: 0.95rem; line-height: 1.6; opacity: 0.8;"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Reveal animation on scroll
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('reveal');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.art-card').forEach(card => {
+        observer.observe(card);
+    });
+
+    window.addEventListener('scroll', () => {
+    const nav = document.querySelector('.glass-nav');
+    
+    // Once the user scrolls more than 50px, the 'scrolled' class is added
+    if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+});
+
+    function openArt(card) {
+        const overlay = document.getElementById('artOverlay');
+        
+        // 1. Extract data from the clicked card
+        const img = card.querySelector('img').src;
+        const title = card.querySelector('.art-title').innerText;
+        
+        // Grabs the text from the first <p> (Artist) and second <p> (Medium)
+        const artist = card.querySelector('.art-meta p:nth-of-type(1)').innerText;
+        const medium = card.querySelector('.art-meta p:nth-of-type(2)').innerText;
+        
+        // Grabs the description and the date from data-attributes
+        const description = card.getAttribute('data-description') || "No description available.";
+        const date = card.getAttribute('data-date') || "2026"; 
+
+        // 2. Push data into the overlay elements
+        document.getElementById('overlayImg').src = img;
+        document.getElementById('overlayTitle').innerText = title;
+        document.getElementById('overlayArtist').innerText = artist; // NEW
+        document.getElementById('overlayDate').innerText = "Created: " + date; // NEW
+        document.getElementById('overlayMedium').innerText = medium;
+        document.getElementById('overlayDesc').innerText = description;
+
+        // 3. Show overlay
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; 
+    }
+
+    function closeArt() {
+        const overlay = document.getElementById('artOverlay');
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    }
+
+    // Update your card observer to include the click event
+    document.querySelectorAll('.art-card').forEach(card => {
+        observer.observe(card);
+        card.style.cursor = 'zoom-in';
+        card.addEventListener('click', () => openArt(card));
+    });
+
+        // --- ARTIST PROFILE FUNCTIONS ---
+        function openArtist(card) {
+            const overlay = document.getElementById('artistOverlay');
+            
+            // 1. Extract data (Assuming your artist cards are built like the example)
+            const img = card.querySelector('img').src;
+            const name = card.getAttribute('data-name');    
+            const age = card.getAttribute('data-age');
+            const course = card.getAttribute('data-course');
+            const address = card.getAttribute('data-address');
+            const style = card.getAttribute('data-style');
+            const bio = card.getAttribute('data-bio');
+            const statement = card.getAttribute('data-statement');
+
+            // 2. Populate the Artist Overlay
+            document.getElementById('profileImg').src = img;
+            document.getElementById('profileName').innerText = name;
+            document.getElementById('profileCourse').innerText = course;
+            // Combining Age, Address, Style for a clean sub-header
+            document.getElementById('profileMeta').innerText = `${age} | ${address} | Art Style: ${style}`;
+            document.getElementById('profileBio').innerText = bio;
+            document.getElementById('profileStatement').innerText = statement;
+
+            // 3. Reveal with the 'active' class
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Stop scrolling background
+        }
+
+        function closeArtist() {
+            const overlay = document.getElementById('artistOverlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto'; // Re-enable scrolling
+        }
+
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.gallery-section');
+            
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const viewportHeight = window.innerHeight;
+                
+                // Only calculate if the section is on screen
+                if (rect.top < viewportHeight && rect.bottom > 0) {
+                    // This math finds the center of the section relative to the center of your eyes
+                    // It ensures that at a certain point, the offset is exactly 0
+                    const centerOffset = rect.top - (viewportHeight * 0.1); 
+                    const parallaxValue = centerOffset * 0.15; // 0.15 is the speed
+                    
+                    section.style.setProperty('--parallax-offset', `${parallaxValue}px`);
+                }
+            });
+        });
+
+</script>
+
+</body>
+</html>
