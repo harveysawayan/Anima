@@ -1304,6 +1304,56 @@
             }
         }
 
+        /* =========================
+        📱 MOBILE NAV FIX
+        ========================= */
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+
+            .glass-nav {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                height: auto;
+                padding: 15px 20px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(10, 15, 10, 0.95);
+                backdrop-filter: blur(20px);
+                padding: 20px 0;
+                gap: 20px;
+
+                display: none; /* hidden by default */
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+        }
+
 
     </style>
 </head>
@@ -1314,6 +1364,7 @@
 <nav class="glass-nav">
     <div class="brand-block">
         <div class="nav-logo">ANIMA<span>COLLECTION</span></div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <span class="group-tag">THE ANIMAL GALLERY | GROUP 4</span>
     </div>
     <div class="nav-links">
@@ -1934,6 +1985,10 @@
                 }
             });
         });
+
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
 
 </script>
 
